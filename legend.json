@@ -1,0 +1,65 @@
+{
+  "notation": "Lmapping",
+  "version": "0.1",
+  "date": "2026-07-01",
+  "author": "Nicolas Limare",
+  "license": "CC-BY-SA-4.0",
+  "description": "Machine-readable schema for the Lmapping roadmap notation. A card carries two orthogonal signals: STATUS (its colour) and PHASE (its name + column position). A parser resolves a board deterministically by matching each card's fill/border against legend_hex and reading connectors as typed arrows.",
+  "axes": {
+    "status": {
+      "carrier": "card fill colour + a stronger same-hue border",
+      "independent_of": "position",
+      "note": "A card's colour means the same thing anywhere on the board."
+    },
+    "phase": {
+      "carrier": "card name + column position",
+      "column_header": "a target time period (e.g. a month)"
+    }
+  },
+  "status_cycle": [
+    { "order": 1, "name": "Demand",        "fill": "#8a26ff", "border": "#6a1fc0", "meaning": "A request has been raised but not yet adopted onto the roadmap." },
+    { "order": 2, "name": "Intend",        "fill": "#ca8fff", "border": "#a066e0", "meaning": "Adopted as an intention; being shaped, not yet committed." },
+    { "order": 3, "name": "Commit",        "fill": "#ff8178", "border": "#e0554c", "meaning": "Committed to a target period. Committed does NOT mean work has started." },
+    { "order": 4, "name": "Solution",      "fill": "#00b0f0", "border": "#0088c0", "meaning": "Work begins here: the solution is being defined. Always the first active phase." },
+    { "order": 5, "name": "Specification", "fill": "#9cd4ff", "border": "#6fb0e8", "meaning": "The first release is being specified. Handover to delivery happens at the end of this phase." },
+    { "order": 6, "name": "Development",   "fill": "#ffd418", "border": "#d4af00", "meaning": "In build (the delivery zone). This is the colour a card shows while 'active' in delivery." },
+    { "order": 7, "name": "QA",            "fill": "#a1e5b8", "border": "#599c70", "meaning": "In verification." },
+    { "order": 8, "name": "Done/Release",  "fill": "#92d050", "border": "#6fa83c", "meaning": "Delivered / released." }
+  ],
+  "modifiers": {
+    "blocked":   { "fill": "#ff2e00", "text": "#ffffff", "solid": true, "note": "A hard stop. Solid red, distinct from every status colour." },
+    "attention": { "fill": "#ff8a00", "alt_border": "thick red border", "keeps_status": true, "note": "Flags a card needing attention while KEEPING its underlying status. Explicitly NOT Blocked." },
+    "staging":   { "fill_opacity": 0.2, "note": "A ghosted, faded intermediate step inside a chain." },
+    "corner_chip": { "note": "A small tag in a card corner: dependency marker or track membership." }
+  },
+  "cartouche": {
+    "shape": "a box drawn around several cards",
+    "means": "the enclosed cards form ONE release; the release is the union of their subjects"
+  },
+  "arrows": {
+    "two_ends_one_arrow": "A summarised link (kick-start to rollout) shown in the published/collapsed view.",
+    "inter_track_dependency": "A dependency from a card in one track to a card in another.",
+    "chain_progression": "A step-to-step link along an expanded milestone chain."
+  },
+  "legend_hex": {
+    "Demand": "#8a26ff",
+    "Intend": "#ca8fff",
+    "Commit": "#ff8178",
+    "Solution": "#00b0f0",
+    "Specification": "#9cd4ff",
+    "Development": "#ffd418",
+    "QA": "#a1e5b8",
+    "Done/Release": "#92d050",
+    "Blocked": "#ff2e00",
+    "Attention": "#ff8a00"
+  },
+  "encoding_contract": {
+    "read": "For each card, read fill, border, and fill-opacity; match fill against legend_hex to resolve status; read the column header for the phase's target period; read connectors as typed arrows.",
+    "matching": "Match on the nearest legend_hex colour; a fill-opacity near 0.2 marks staging; a solid #ff2e00 fill marks Blocked; an #ff8a00 fill or a thick red border marks Attention over the resolved status.",
+    "skills": {
+      "read_skill": "Turns a board into structured data (cards, statuses, phases, cartouches, arrows).",
+      "write_skill": "Applies updates and changes back onto the board in valid notation.",
+      "compatibility": ["openai", "anthropic"]
+    }
+  }
+}
