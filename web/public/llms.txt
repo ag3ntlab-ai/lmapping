@@ -1,0 +1,21 @@
+# Lmapping
+
+> Lmapping is an open roadmap notation and delivery method. Status is a colour, phase is a position. Two orthogonal axes on a Kanban-Gantt board, driven by a gate-and-loop process, readable at four zoom levels, and encoded so the same board is parsed identically by a human and an AI. Free and open (CC BY-SA 4.0); author Nicolas Limare.
+
+## What it is
+- A notation, not a tool: any surface that draws a coloured box and an arrow can hold it (Miro, Excalidraw, FigJam, tldraw, any whiteboard).
+- Status is carried by colour (a light fill with a stronger same-hue border); phase is carried by the card's name and its column (a target month). The two axes are independent.
+- Eight-status lifecycle: Demand, Intend, Commit, Solution, Specification, Development, QA, Done/Release. Plus modifiers (Attention, Blocked), a release cartouche, and a three-arrow grammar.
+- One model, four reads: the single-card life, collapsed vs expanded, published vs internal, and the portfolio time-band.
+- Machine-readable by design: a board resolves deterministically via a legend_hex map; a read-skill turns it into data, a write-skill applies changes back in valid notation.
+
+## Docs
+- [The notation, in full](https://lmapping.com/notation): the complete reading key and usage rules, with exact hex colours.
+- [The specification (v0.1)](https://github.com/ag3ntlab-ai/lmapping/blob/main/SPEC.md): the canonical, versioned spec, conformance rules, and the legend_hex schema.
+- [Full knowledge base for language models](https://lmapping.com/llms-full.txt): the exhaustive notation, rules, competitive analysis, differentiators, and references.
+- [Open repository](https://github.com/ag3ntlab-ai/lmapping): spec, legend.json, examples.
+
+## Why it is different
+- Roadmaps have no agreed notation; the field runs on per-tool templates. A rigorous, self-describing notation is differentiated by simply existing.
+- Unlike Gantt charts, Kanban tools and roadmap SaaS, Lmapping carries a rigorous, machine-readable notation and ties you to no software.
+- The novelty is the combination: an orthogonal status/phase grammar, on a Kanban-Gantt board, with a gate-and-loop engine, at four zoom levels, read the same by a human and a machine.

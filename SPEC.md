@@ -38,16 +38,18 @@ The two axes are **independent**: status (colour) means the same thing in any co
 
 Lmapping defines an **8-status delivery lifecycle**. Each status has a name, a meaning, and a **recommended reference colour**. The colours below are a *recommended* palette; an implementation MAY substitute a palette but MUST keep colours distinguishable and MUST publish its own `legend_hex` map (§9) so the board stays machine-resolvable.
 
-| # | Status | Meaning | Reference fill |
-|---|---|---|---|
-| 1 | **Demand** | Raised, not yet adopted onto the roadmap. | `#8a26ff` |
-| 2 | **Intend** | Adopted as an intention; being shaped, not committed. | `#ca8fff` |
-| 3 | **Commit** | Committed to a target period. *Committed ≠ started.* | `#ff8178` |
-| 4 | **Solution** | Work begins here — defining the solution. Always the first *active* phase. | `#00b0f0` |
-| 5 | **Specification** | The first release is being specified. Handover happens at the end. | `#9cd4ff` |
-| 6 | **Development** | In build. This is the colour a card shows while active in delivery. | `#ffd418` |
-| 7 | **QA** | In verification. | `#a1e5b8` |
-| 8 | **Done/Release** | Delivered / released. | `#92d050` |
+| # | Status | Meaning | Fill | Border |
+|---|---|---|---|---|
+| 1 | **Demand** | Raised, not yet adopted onto the roadmap. | `#c593ff` | `#8a26ff` |
+| 2 | **Intend** | Adopted as an intention; being shaped, not committed. | `#e5c7ff` | `#ca8fff` |
+| 3 | **Commit** | Committed to a target period. Committed is not started. | `#ffc0bc` | `#ff8178` |
+| 4 | **Solution** | Work begins here, defining the solution. Always the first *active* phase. | `#80d8f8` | `#00b0f0` |
+| 5 | **Specification** | The first release is being specified. Handover happens at the end. | `#ceeaff` | `#b3dafb` |
+| 6 | **Development** | In build. This is the colour a card shows while active in delivery. | `#ffea8c` | `#ffd418` |
+| 7 | **QA** | In verification. | `#a1e5b8` | `#599c70` |
+| 8 | **Done/Release** | Delivered / released. | `#c9e8a8` | `#92d050` |
+
+Each colour is a **light fill with a stronger same-hue border**. Modifiers (§4): **Blocked** is a solid `#ff2e00` (light text); **Attention** is an `#ff8a00` fill or a thick red border.
 
 **"Active" is not a fixed colour.** A card that is currently being worked shows the colour of *its current phase* — a card active in Development is yellow, a card active in Solution is blue. There is no single "in progress" colour; progress is read from *which* lifecycle colour the card currently wears.
 
@@ -115,7 +117,7 @@ One model, four reads. Compression changes the **view**, never the **model** —
 1. **Single-card life (the "card-player").** An interactive scrub through *one* card's life, beat by beat: how it moves phase by phase and repositions in time as gates fire.
 2. **Collapsed vs expanded.** A single **release-card** (collapsed) vs the **full milestone chain** (expanded). The collapse is a view compression.
 3. **Published vs internal.** A **published** view draws only the legible "two-ends + one-arrow" summary (§6.1); the **internal** view shows the full chain and micro-management.
-4. **Portfolio / time-band.** Zoomed out, **position alone** gives a coarse, portfolio-level status read — where the mass of work sits in time — without reading individual colours.
+4. **Portfolio / time-band.** Zoomed out, **position alone** gives a coarse, portfolio-level status read — where the mass of work sits in time — without reading individual colours. The header **double-encodes** time: the lower row is the target-month cartouche (on a Kanban the month marks the *end* of the work); an optional upper band per quarter/year is a **status-guidance zone** — the status a card in that time is expected to hold (Q+1 is where Intend/Demand lock into a month as Commit).
 
 ---
 

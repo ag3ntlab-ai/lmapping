@@ -1,0 +1,42 @@
+# Lmapping is open by design. All crawlers are welcome, search and AI alike.
+# There is nothing to gate: the whole point is that a machine reads the method.
+
+User-agent: *
+Allow: /
+
+# Explicitly welcome the AI crawlers.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Machine-readable knowledge for language models:
+#   /llms.txt      — a concise index
+#   /llms-full.txt — the full notation, rules, competitive analysis and references
+
+Sitemap: https://lmapping.com/sitemap.xml
