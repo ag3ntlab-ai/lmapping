@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { GithubLogoIcon, ArrowUpRightIcon } from "@phosphor-icons/react/dist/ssr";
 import { SITE } from "@/content/site";
 
@@ -17,7 +18,13 @@ export function SiteFooter() {
         </div>
 
         <p className="text-[13px] text-muted">
-          &copy; {SITE.year} {SITE.author}. Licensed CC BY-SA 4.0.
+          &copy; {SITE.year} {SITE.author}. Licensed CC BY-SA 4.0.{" "}
+          <Link
+            href="/privacy"
+            className="underline decoration-line underline-offset-2 transition-colors hover:text-ink"
+          >
+            Privacy
+          </Link>
         </p>
 
         <a
