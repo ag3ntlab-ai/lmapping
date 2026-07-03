@@ -47,9 +47,9 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
-      # Create the schema on the throwaway DB (still db push until the migration
-      # baseline lands; CI switches to `prisma migrate deploy` at that point).
-      - run: npx prisma db push --skip-generate
+      # Apply the versioned migrations to the throwaway DB (replaced `db push`
+      # once the migration baseline landed).
+      - run: npx prisma migrate deploy
       - run: npx playwright install --with-deps chromium
       - name: Run E2E (with database)
         run: npm run test:e2e
