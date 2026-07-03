@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Hanken_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { PHProvider } from "./providers";
 
 const display = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -64,7 +65,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-[100dvh] flex-col font-body text-ink">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }} />
-        {children}
+        <PHProvider>{children}</PHProvider>
         <Analytics />
       </body>
     </html>

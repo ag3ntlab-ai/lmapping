@@ -59,14 +59,16 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="Analytics">
-            We use Vercel Web Analytics to count page views. It is cookieless: it sets no cookies and
-            builds no profile of you, which is why the site shows no cookie banner.
+            We use Vercel Web Analytics to count page views, and PostHog (hosted in the European
+            Union) to understand which steps people take. Both are configured cookieless: they set no
+            cookies and build no persistent profile of you, which is why the site shows no cookie
+            banner.
           </Section>
 
           <Section title="Where your data lives">
-            Our database is hosted by Neon in {DB_LOCATION}. The site is hosted by Vercel, a US
-            company, under Standard Contractual Clauses. We keep a data processing agreement with
-            each.
+            Our database is hosted by Neon in {DB_LOCATION}, and the site by Vercel, a US company,
+            both under Standard Contractual Clauses. Our product analytics run on PostHog, hosted in
+            the European Union. We keep a data processing agreement with each.
           </Section>
 
           <Section title="How long we keep it">

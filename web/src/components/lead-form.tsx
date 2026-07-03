@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { z } from "zod";
 import { CheckCircleIcon, CircleNotchIcon } from "@phosphor-icons/react";
+import { usePostHog } from "@posthog/react";
 import { Button, Input, Label } from "@/components/ui";
 import { CTA } from "@/content/site";
 
@@ -23,6 +24,7 @@ export function LeadForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [consentError, setConsentError] = useState(false);
   const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const posthog = usePostHog();
 
   const set = (k: Field) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setValues((v) => ({ ...v, [k]: e.target.value }));
@@ -47,7 +49,13 @@ export function LeadForm() {
         body: JSON.stringify({ ...parsed.data, consent: true, homepage: honeypot }),
       });
       if (!res.ok) throw new Error("bad status");
+      const result = await res.json().catch(() => null);
       setState("done");
+      // Conversion event, only for a genuinely persisted lead (never the honeypot
+      // path or the local no-DB fallback), so the funnel counts real signups only.
+      if (!honeypot && result?.persisted === true) {
+        posthog?.capture("lead_submitted", { source: "one-pager" });
+      }
     } catch {
       setState("error");
     }
