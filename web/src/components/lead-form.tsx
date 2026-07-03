@@ -23,7 +23,7 @@ export function LeadForm() {
   const [honeypot, setHoneypot] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [consentError, setConsentError] = useState(false);
-  const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [state, setState] = useState<"idle" | "loading" | "done" | "error" | "ratelimited">("idle");
   const posthog = usePostHog();
 
   const set = (k: Field) => (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -48,6 +48,12 @@ export function LeadForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...parsed.data, consent: true, homepage: honeypot }),
       });
+      if (res.status === 429) {
+        // Edge rate limit (Vercel firewall). Show a distinct, calm message
+        // rather than the generic error, and let the user retry.
+        setState("ratelimited");
+        return;
+      }
       if (!res.ok) throw new Error("bad status");
       const result = await res.json().catch(() => null);
       setState("done");
@@ -162,6 +168,11 @@ export function LeadForm() {
       {state === "error" && (
         <p role="alert" className="text-[13px] font-medium text-blocked">
           Something went wrong. Please try again.
+        </p>
+      )}
+      {state === "ratelimited" && (
+        <p role="alert" className="text-[13px] font-medium text-blocked">
+          Too many attempts. Please try again in a minute.
         </p>
       )}
     </form>
