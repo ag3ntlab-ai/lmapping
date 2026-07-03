@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const UPDATED = "3 July 2026";
-const CONTACT = "privacy@lmapping.com";
+const CONTACT = "nicozefrench@gmail.com";
 // Reflects the live DATABASE_URL region. Currently Neon us-east-1 (United States).
 // If the database ever moves to the EU, update this to match; never claim a
 // region the database is not actually in.
