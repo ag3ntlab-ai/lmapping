@@ -98,6 +98,7 @@ export function RoadmapBoard({
   // Measure the cartouche frame, then aim the dependency arrow at the cartouche.
   useLayoutEffect(() => {
     if (mode !== "lmapping") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot reset when not in lmapping mode; deps-gated on [mode, data], not a render loop
       setOverlay({});
       return;
     }
