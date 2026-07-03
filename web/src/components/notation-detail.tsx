@@ -100,7 +100,7 @@ export function NotationDetail() {
       {/* Lifecycle */}
       <section className="mt-20">
         <Reveal>
-          <SectionLabel>A card's lifecycle</SectionLabel>
+          <SectionLabel>A card&apos;s lifecycle</SectionLabel>
           <h2 className="mt-2.5 font-display text-2xl font-semibold tracking-[-0.015em] text-ink sm:text-[1.9rem]">{NP.lifecycleTitle}</h2>
         </Reveal>
         <Reveal delay={0.06} className="no-scrollbar mt-7 flex items-center gap-1.5 overflow-x-auto pb-1">
