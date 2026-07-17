@@ -61,8 +61,9 @@ export default function PrivacyPage() {
           <Section title="Analytics">
             We use Vercel Web Analytics to count page views, and PostHog (hosted in the European
             Union) to understand which steps people take. Both are configured cookieless: they set no
-            cookies and build no persistent profile of you, which is why the site shows no cookie
-            banner.
+            cookies and build no persistent profile of you. We also use Google Analytics 4, which does
+            set cookies, so it stays off by default and only turns on if you accept the cookie banner.
+            You can change your choice any time by clearing your browser storage for this site.
           </Section>
 
           <Section title="Where your data lives">

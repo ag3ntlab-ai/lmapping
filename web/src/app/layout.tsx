@@ -1,8 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Hanken_Grotesk } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { PHProvider } from "./providers";
+import { ConsentBanner } from "@/components/consent-banner";
+
+// GA4, gated by Consent Mode v2. Both scripts run beforeInteractive so the
+// consent default is set before gtag.js is ever fetched, in the order Google
+// documents (default -> load gtag.js -> config). The measurement ID is public
+// by design (it appears in every GA-tagged page's HTML), no env var needed.
+const GA_MEASUREMENT_ID = "G-ZSRRCBCDM9";
 
 const display = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -64,9 +72,30 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="flex min-h-[100dvh] flex-col font-body text-ink">
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+window.gtag = gtag;
+gtag('consent', 'default', {
+  analytics_storage: 'denied',
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied'
+});`}
+        </Script>
+        <Script
+          id="ga4-loader"
+          strategy="beforeInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        />
+        <Script id="ga4-config" strategy="beforeInteractive">
+          {`gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');`}
+        </Script>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }} />
         <PHProvider>{children}</PHProvider>
         <Analytics />
+        <ConsentBanner />
       </body>
     </html>
   );
