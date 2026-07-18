@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Privacy | Lmapping",
   description:
     "What data Lmapping collects when you request early access, why, where it lives, and your rights.",
+  alternates: { canonical: "/privacy" },
 };
 
 const UPDATED = "3 July 2026";
