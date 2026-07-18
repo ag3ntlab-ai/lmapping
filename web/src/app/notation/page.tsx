@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "The Lmapping notation: the full reading key",
   description:
     "The complete Lmapping notation and its usage rules: status is a colour, phase is a position, and how time constrains a card. Accurate, open, and free.",
+  alternates: { canonical: "/notation" },
 };
 
 export default function NotationPage() {

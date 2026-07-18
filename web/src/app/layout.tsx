@@ -48,6 +48,7 @@ export const metadata: Metadata = {
     "Lmapping is a roadmap notation: status is a colour, phase is a position. Draw it anywhere, and an AI reads and updates it. Open and free.",
   applicationName: "Lmapping",
   appleWebApp: { capable: true, title: "Lmapping", statusBarStyle: "default" },
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Lmapping: a roadmap notation for humans and machines",
     description:
